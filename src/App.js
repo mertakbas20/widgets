@@ -20,17 +20,18 @@ const items = [
 const options = [
     {
         title: 'The Color Red',
-        value: 'red',
+        value: 'red'
     },
     {
         title: 'The Color Green',
-        value: 'green',
+        value: 'green'
     },
     {
         title: 'A Shade of Blue',
-        value: 'blue',
-    }
+        value: 'blue'
+    }  
 ];
+
 export default () => {
     return (
         <div>
