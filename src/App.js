@@ -1,7 +1,7 @@
 import React from 'react';
 import Accordion from './components/Accordion';
 import Search from './components/Search';
-
+import Dropdown from './components/Dropdown';
 const items = [
     {
         title: 'What is React?',
@@ -16,10 +16,25 @@ const items = [
         content: 'You use React by creating components',
     },
 ];
+
+const options = [
+    {
+        title: 'The Color Red',
+        value: 'red',
+    },
+    {
+        title: 'The Color Green',
+        value: 'green',
+    },
+    {
+        title: 'A Shade of Blue',
+        value: 'blue',
+    }
+];
 export default () => {
     return (
         <div>
-            <Search />
+            <Dropdown options={options} />
         </div>
     );
 
