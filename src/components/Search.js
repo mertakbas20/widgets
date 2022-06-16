@@ -3,7 +3,17 @@ import axios from 'axios';
 
 const Search = () => {
     const [term, setTerm] = useState('programming');
+    const [debouncedTerm, setDebouncedTerm] = useState('programming');
     const [results, setResults] = useState([]);
+
+    useEffect(() => {
+        const timerId = setTimeout(() => {
+            setDebouncedTerm(term);
+        }, 1000);
+        return () => {
+            clearTimeout(timerId);
+        };
+    }, [term]);
 
     useEffect(() => {
         const search = async () => {
@@ -13,24 +23,22 @@ const Search = () => {
                     list: 'search',
                     origin: '*',
                     format: 'json',
-                    srsearch: term,
+                    srsearch: debouncedTerm,
                 }
             });
 
             setResults(data.query.search);
         };
-        if(term) {
-            search();
-        }
-    }, [term]);
+        search();
+    }, [debouncedTerm]);
 
     const renderedResults = results.map((result) => {
         return (
             <div key={result.pageid} className='item'>
                 <div className='right floated content'>
-                    <a 
-                    className='ui button'
-                    href={`https://en.wikipedia.org?curid=${result.pageid}`}
+                    <a
+                        className='ui button'
+                        href={`https://en.wikipedia.org?curid=${result.pageid}`}
                     >
                         Go
                     </a>
